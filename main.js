@@ -1,0 +1,1 @@
+InstaMax().enableImageDownload().addAccessToPlaces();

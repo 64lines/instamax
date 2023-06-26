@@ -1,6 +1,19 @@
+/**
+ * Algebraic Structure that contains all the InstaMax funcitions.
+ * 
+ * == Getting all the location Links ==
+ * 1. Go to the /explore/locations page.
+ * 2. Select a location.
+ * 3. Select an additional location.
+ * 4. Copy paste this algebraic structure to the browser console.
+ * 5. Run: 
+ *   InstaMax()._getLocationLinks()
+ * 6. Copy the results into the "locations.js" file.
+ */
 const InstaMax = () => ({
-  getLocationsURL: () => {
-    return "/explore/locations/";
+  getRandomLocationURL: () => {
+    const random = Math.floor(Math.random() * LOCATIONS.length);
+    return LOCATIONS[random];
   },
   increaseImages: (pixels) => {
     const [, section] = document.getElementsByTagName("section");
@@ -27,11 +40,7 @@ const InstaMax = () => ({
     return `${styleList.join(";")};`;
   },
   addAccessToPlaces: () => {
-    const leftPanel = Array.from(
-      document.getElementsByClassName("x1iyjqo2")
-    ).find((element) => element.tagName === "DIV");
-    if (!leftPanel) return;
-
+    /** Button */
     const placesButton = document.createElement("div");
     placesButton.className = "places-button-instamax";
     placesButton.style = InstaMax().createStyle([
@@ -41,10 +50,11 @@ const InstaMax = () => ({
       "font-weight: 800",
       "justify-content: center",
     ]);
-    placesButton.innerHTML = "P";
+    placesButton.innerHTML = "R";
 
+    /** Label */
     const placesLabel = document.createElement("div");
-    placesLabel.innerText = "Places";
+    placesLabel.innerText = "Random Location";
     placesLabel.className = "places-label-instamax";
     placesLabel.style = "font-size: 16px;";
     placesLabel.style = InstaMax().createStyle([
@@ -55,11 +65,12 @@ const InstaMax = () => ({
       "justify-content: center",
     ]);
 
+    /** Button Container */
     const placesButtonContainer = document.createElement("div");
     placesButtonContainer.style = InstaMax().createStyle([
       "top: 50%",
       "z-index: 1",
-      "right: -32px",
+      "right: -71px",
       "display: flex",
       "cursor: pointer",
       "position: fixed",
@@ -70,7 +81,7 @@ const InstaMax = () => ({
     placesButtonContainer.appendChild(placesButton);
     placesButtonContainer.appendChild(placesLabel);
     placesButtonContainer.onclick = () => {
-      window.open(InstaMax().getLocationsURL(), "_blank");
+      window.location.href = InstaMax().getRandomLocationURL();
     };
     document.body.appendChild(placesButtonContainer);
 
@@ -78,5 +89,3 @@ const InstaMax = () => ({
     return InstaMax();
   },
 });
-
-InstaMax().enableImageDownload().addAccessToPlaces();
